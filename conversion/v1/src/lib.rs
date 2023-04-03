@@ -24,6 +24,14 @@ pub mod rules {
     pub fn r3(content: &str) -> String {
         replace(content, "ei", "y")
     }
+
+    /// # rule 4
+    ///
+    /// c -> k
+    ///
+    pub fn r4(content: &str) -> String {
+        replace(content, "c", "k")
+    }
 }
 
 pub fn replace(content: &str, old: &str, new: &str) -> String {
@@ -81,5 +89,14 @@ mod tests {
 
         assert!(test_conversion(rules::r3, example_1));
         assert!(test_conversion(rules::r3, example_2));
+    }
+
+    #[test]
+    fn r4() {
+        let example_1 = Example::build("canon", "kanon");
+        let example_2 = Example::build("cacoa", "kakoa");
+
+        assert!(test_conversion(rules::r4, example_1));
+        assert!(test_conversion(rules::r4, example_2));
     }
 }
