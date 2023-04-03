@@ -32,6 +32,14 @@ pub mod rules {
     pub fn r4(content: &str) -> String {
         replace(content, "c", "k")
     }
+
+    /// # rule 4
+    ///
+    /// q -> kw
+    ///
+    pub fn r5(content: &str) -> String {
+        replace(content, "q", "kw")
+    }
 }
 
 pub fn replace(content: &str, old: &str, new: &str) -> String {
@@ -98,5 +106,12 @@ mod tests {
 
         assert!(test_conversion(rules::r4, example_1));
         assert!(test_conversion(rules::r4, example_2));
+    }
+
+    #[test]
+    fn r5() {
+        let example_1 = Example::build("quiz", "kwuiz");
+
+        assert!(test_conversion(rules::r5, example_1));
     }
 }
