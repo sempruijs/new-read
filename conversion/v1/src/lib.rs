@@ -8,6 +8,14 @@ pub mod rules {
     pub fn r1(content: &str) -> String {
         replace(content, "ch", "sj")
     }
+
+    /// # rule 2
+    ///
+    /// ij -> y
+    ///
+    pub fn r2(content: &str) -> String {
+        replace(content, "ij", "y")
+    }
 }
 
 pub fn replace(content: &str, old: &str, new: &str) -> String {
@@ -21,10 +29,22 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_test() {
-        let ipt = "chocola";
-        let result = rules::r1(&ipt);
+    fn r1() {
+        let example_1 = "chocola";
+        let result = rules::r1(&example_1);
 
         assert_eq!(result, "sjocola");
+    }
+
+    #[test]
+    fn r2() {
+        let example_1 = "ijsje";
+        let example_2 = "belangrijk";
+
+        let result_1 = rules::r2(&example_1);
+        let result_2 = rules::r2(&example_2);
+
+        assert_eq!(result_1, "ysje");
+        assert_eq!(result_2, "belangryk");
     }
 }
