@@ -3,10 +3,10 @@ pub mod rules {
     ///
     /// ch -> sj
     ///
-    pub fn r1(content: String) -> String {
+    pub fn r1(content: &str) -> String {
         let result = content.replace("ch", "sj");
 
-        result
+        String::from(result)
     }
 }
 
@@ -16,8 +16,8 @@ mod tests {
 
     #[test]
     fn it_test() {
-        let ipt = "chocola".to_string();
-        let result = rules::r1(ipt);
+        let ipt = "chocola";
+        let result = rules::r1(&ipt);
 
         assert_eq!(result, "sjocola");
     }
