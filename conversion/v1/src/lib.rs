@@ -114,4 +114,72 @@ mod tests {
 
         assert!(test_conversion(rules::r5, example_1));
     }
+
+    #[test]
+    fn r6() {
+        let example_1 = Example::build("fiets", "viets");
+        let example_1 = Example::build("fluit", "vluit");
+
+        assert!(test_conversion(rules::r6, example_1));
+        assert!(test_conversion(rules::r6, example_2));
+    }
+
+    #[test]
+    fn r7() {
+        let example_1 = Example::build("school", "sgool");
+        let example_1 = Example::build("schoon", "sgoon");
+
+        assert!(test_conversion(rules::r7, example_1));
+        assert!(test_conversion(rules::r7, example_2));
+    }
+
+    #[test]
+    fn r8() {
+        let example_1 = Example::build("wordt", "wort");
+
+        assert!(test_conversion(rules::r8, example_1));
+    }
+
+    #[test]
+    fn r9() {
+        let example_1 = Example::build("tijd", "tijt");
+        let example_2 = Example::build("deed", "deet");
+
+        assert!(test_conversion(rules::r9, example_1));
+        assert!(test_conversion(rules::r9, example_2));
+    }
+
+    #[test]
+    fn r10() {
+        let example_1 = Example::build("ring", "riq");
+        let example_2 = Example::build("bang", "baq");
+
+        assert!(test_conversion(rules::r10, example_1));
+        assert!(test_conversion(rules::r10, example_2));
+    }
+
+    #[test]
+    fn r11() {
+        let example_1 = Example::build("bankier", "baqkier");
+        let example_2 = Example::build("bedanken", "bedaqken");
+
+        assert!(test_conversion(rules::r11, example_1));
+        assert!(test_conversion(rules::r11, example_2));
+    }
+
+    #[test]
+    fn r12() {
+        let example_1 = Example::build("ouderwets", "auderwets");
+        let example_2 = Example::build("oude", "aude");
+
+        assert!(test_conversion(rules::r12, example_1));
+        assert!(test_conversion(rules::r12, example_2));
+    }
+
+    #[test]
+    fn r13() {
+        let example_1 = Example::build("extra", "ekstra");
+
+        assert!(test_conversion(rules::r12, example_1));
+    }
 }
