@@ -33,12 +33,78 @@ pub mod rules {
         replace(content, "c", "k")
     }
 
-    /// # rule 4
+    /// # rule 5
     ///
     /// q -> kw
     ///
     pub fn r5(content: &str) -> String {
         replace(content, "q", "kw")
+    }
+
+    /// # rule 6
+    ///
+    /// f -> v
+    ///
+    pub fn r6(content: &str) -> String {
+        replace(content, "f", "v")
+    }
+
+    /// # rule 7
+    ///
+    /// sch -> sg
+    ///
+    pub fn r7(content: &str) -> String {
+        replace(content, "sch", "sg")
+    }
+
+    /// # rule 8
+    ///
+    /// ...dt -> t
+    ///
+    pub fn r8(content: &str) -> String {
+        //TODO: write functionality
+        replace(content, "f", "v")
+    }
+
+    /// # rule 9
+    ///
+    /// ...d -> t
+    ///
+    pub fn r9(content: &str) -> String {
+        //TODO: write functionality
+        replace(content, "f", "v")
+    }
+
+    /// # rule 10
+    ///
+    /// ng -> q
+    ///
+    pub fn r10(content: &str) -> String {
+        replace(content, "ng", "q")
+    }
+
+    /// # rule 11
+    ///
+    /// nk -> qk
+    ///
+    pub fn r11(content: &str) -> String {
+        replace(content, "nk", "qk")
+    }
+
+    /// # rule 12
+    ///
+    /// ou -> au
+    ///
+    pub fn r12(content: &str) -> String {
+        replace(content, "ou", "au")
+    }
+
+    /// # rule 13
+    ///
+    /// x -> ks
+    ///
+    pub fn r13(content: &str) -> String {
+        replace(content, "x", "ks")
     }
 }
 
@@ -75,14 +141,14 @@ mod tests {
     }
 
     #[test]
-    fn r1() {
+    fn test_r1() {
         let example = Example::build("chocola", "sjocola");
 
         assert!(test_conversion(rules::r1, example));
     }
 
     #[test]
-    fn r2() {
+    fn test_r2() {
         let example_1 = Example::build("ijsje", "ysje");
         let example_2 = Example::build("belangrijk", "belangryk");
 
@@ -91,7 +157,7 @@ mod tests {
     }
 
     #[test]
-    fn r3() {
+    fn test_r3() {
         let example_1 = Example::build("eindelijk", "yndelijk");
         let example_2 = Example::build("eisen", "ysen");
 
@@ -100,7 +166,7 @@ mod tests {
     }
 
     #[test]
-    fn r4() {
+    fn test_r4() {
         let example_1 = Example::build("canon", "kanon");
         let example_2 = Example::build("cacoa", "kakoa");
 
@@ -109,39 +175,39 @@ mod tests {
     }
 
     #[test]
-    fn r5() {
+    fn test_r5() {
         let example_1 = Example::build("quiz", "kwuiz");
 
         assert!(test_conversion(rules::r5, example_1));
     }
 
     #[test]
-    fn r6() {
+    fn test_r6() {
         let example_1 = Example::build("fiets", "viets");
-        let example_1 = Example::build("fluit", "vluit");
+        let example_2 = Example::build("fluit", "vluit");
 
         assert!(test_conversion(rules::r6, example_1));
         assert!(test_conversion(rules::r6, example_2));
     }
 
     #[test]
-    fn r7() {
+    fn test_r7() {
         let example_1 = Example::build("school", "sgool");
-        let example_1 = Example::build("schoon", "sgoon");
+        let example_2 = Example::build("schoon", "sgoon");
 
         assert!(test_conversion(rules::r7, example_1));
         assert!(test_conversion(rules::r7, example_2));
     }
 
     #[test]
-    fn r8() {
+    fn test_r8() {
         let example_1 = Example::build("wordt", "wort");
 
         assert!(test_conversion(rules::r8, example_1));
     }
 
     #[test]
-    fn r9() {
+    fn test_r9() {
         let example_1 = Example::build("tijd", "tijt");
         let example_2 = Example::build("deed", "deet");
 
@@ -150,7 +216,7 @@ mod tests {
     }
 
     #[test]
-    fn r10() {
+    fn test_r10() {
         let example_1 = Example::build("ring", "riq");
         let example_2 = Example::build("bang", "baq");
 
@@ -159,7 +225,7 @@ mod tests {
     }
 
     #[test]
-    fn r11() {
+    fn test_r11() {
         let example_1 = Example::build("bankier", "baqkier");
         let example_2 = Example::build("bedanken", "bedaqken");
 
@@ -168,7 +234,7 @@ mod tests {
     }
 
     #[test]
-    fn r12() {
+    fn test_r12() {
         let example_1 = Example::build("ouderwets", "auderwets");
         let example_2 = Example::build("oude", "aude");
 
@@ -177,9 +243,9 @@ mod tests {
     }
 
     #[test]
-    fn r13() {
+    fn test_r13() {
         let example_1 = Example::build("extra", "ekstra");
 
-        assert!(test_conversion(rules::r12, example_1));
+        assert!(test_conversion(rules::r13, example_1));
     }
 }
