@@ -1,13 +1,19 @@
 pub mod rules {
+    use super::replace;
+
     /// # rule 1
     ///
     /// ch -> sj
     ///
     pub fn r1(content: &str) -> String {
-        let result = content.replace("ch", "sj");
-
-        String::from(result)
+        replace(content, "ch", "sj")
     }
+}
+
+pub fn replace(content: &str, old: &str, new: &str) -> String {
+    let result = content.replace(old, new);
+
+    String::from(result)
 }
 
 #[cfg(test)]
