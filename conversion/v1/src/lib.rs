@@ -28,23 +28,41 @@ pub fn replace(content: &str, old: &str, new: &str) -> String {
 mod tests {
     use super::*;
 
+    //example for the tests
+    struct Example {
+        input: String,
+        output: String,
+    }
+
+    impl Example {
+        fn build(input: &str, output: &str) -> Self {
+            Example {
+                input: String::from(input),
+                output: String::from(output),
+            }
+        }
+    }
+
+    fn test_conversion(rule: fn(&str) -> String, example: Example) -> bool {
+        let input = example.input;
+        let output = example.output;
+
+        rule(&input) == output
+    }
+
     #[test]
     fn r1() {
-        let example_1 = "chocola";
-        let result = rules::r1(&example_1);
+        let example = Example::build("chocola", "sjocola");
 
-        assert_eq!(result, "sjocola");
+        assert!(test_conversion(rules::r1, example));
     }
 
     #[test]
     fn r2() {
-        let example_1 = "ijsje";
-        let example_2 = "belangrijk";
+        let example_1 = Example::build("ijsje", "ysje");
+        let example_2 = Example::build("belangrijk", "belangryk");
 
-        let result_1 = rules::r2(&example_1);
-        let result_2 = rules::r2(&example_2);
-
-        assert_eq!(result_1, "ysje");
-        assert_eq!(result_2, "belangryk");
+        assert!(test_conversion(rules::r2, example_1));
+        assert!(test_conversion(rules::r2, example_2));
     }
 }
