@@ -9,5 +9,5 @@ It is mostely an experiment than a real product. This repo provides:
 
 ## status
 
-new-read has currently only development for the dutch version, which is in the very pre-alph fase. nothing is tested.
+new-read has currently only development for the dutch version, which is in the very pre-alpha fase. nothing is tested.
 
