@@ -62,8 +62,16 @@ pub mod rules {
     /// ...dt -> t
     ///
     pub fn r8(content: &str) -> String {
-        //TODO: write functionality
-        replace(content, "f", "v")
+        let len = content.len();
+        let last_two_chars = &content[len - 2..];
+        match last_two_chars {
+            "dt" if len > 2 => {
+                let part_without_dt = String::from(&content[..len - 2]);
+
+                String::from(part_without_dt + "t")
+            }
+            _ => String::from(content),
+        }
     }
 
     /// # rule 9
