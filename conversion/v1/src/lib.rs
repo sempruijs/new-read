@@ -79,8 +79,20 @@ pub mod rules {
     /// ...d -> t
     ///
     pub fn r9(content: &str) -> String {
-        //TODO: write functionality
-        replace(content, "f", "v")
+        let last_char = content
+            .chars()
+            .last()
+            .expect("function cannot transform empty string");
+        let len = content.len();
+
+        match last_char {
+            'd' if len > 1 => {
+                let part_without_d = String::from(&content[..len - 1]);
+
+                String::from(part_without_d + "t")
+            }
+            _ => String::from(content),
+        }
     }
 
     /// # rule 10
