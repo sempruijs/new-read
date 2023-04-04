@@ -132,29 +132,54 @@ pub mod rules {
 fn convert_word(word: &str) -> String {
     let mut result = String::from(word);
 
-    result = rules::r1(&result);
     result = rules::r2(&result);
+    println!("2. {}", result);
+
     result = rules::r3(&result);
-    result = rules::r4(&result);
+    println!("3. {}", result);
+
     result = rules::r5(&result);
+    println!("5. {}", result);
+
     result = rules::r6(&result);
+    println!("6. {}", result);
+
     result = rules::r7(&result);
+    println!("7. {}", result);
+
+    result = rules::r1(&result);
+    println!("1. {}", result);
+
+    result = rules::r4(&result);
+    println!("4. {}", result);
+
     result = rules::r8(&result);
+    println!("8. {}", result);
+
     result = rules::r9(&result);
+    println!("9. {}", result);
+
     result = rules::r10(&result);
+    println!("10. {}", result);
+
     result = rules::r11(&result);
+    println!("11. {}", result);
+
     result = rules::r12(&result);
+    println!("12. {}", result);
 
     result
 }
 
 pub fn convert_string(content: &str) -> String {
-    let result = String::from(content);
-
-    result
+    let result: String = content
         .split(' ')
         .map(|word| convert_word(word) + " ")
-        .collect()
+        .collect::<String>();
+
+    let mut result = result.chars();
+    result.next_back();
+    result.as_str().to_string()
 }
 
 pub fn replace(content: &str, old: &str, new: &str) -> String {
@@ -186,7 +211,15 @@ mod tests {
         let input = example.input;
         let output = example.output;
 
-        rule(&input) == output
+        let result = rule(&input) == output;
+
+        match result {
+            true => result,
+            false => {
+                print!("{} , {} -> {}", input, output, rule(&input));
+                result
+            }
+        }
     }
 
     #[test]
@@ -296,5 +329,12 @@ mod tests {
         let example_1 = Example::build("extra", "ekstra");
 
         assert!(test_conversion(rules::r13, example_1));
+    }
+
+    #[test]
+    fn test_convert_string() {
+        let example_1 = Example::build("waarschijnlijk", "waarsgynlyk");
+
+        assert!(test_conversion(convert_string, example_1));
     }
 }
