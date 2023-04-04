@@ -1,3 +1,4 @@
+/// rules can only transform words
 pub mod rules {
     use super::replace;
 
@@ -126,6 +127,34 @@ pub mod rules {
     pub fn r13(content: &str) -> String {
         replace(content, "x", "ks")
     }
+}
+
+fn convert_word(word: &str) -> String {
+    let mut result = String::from(word);
+
+    result = rules::r1(&result);
+    result = rules::r2(&result);
+    result = rules::r3(&result);
+    result = rules::r4(&result);
+    result = rules::r5(&result);
+    result = rules::r6(&result);
+    result = rules::r7(&result);
+    result = rules::r8(&result);
+    result = rules::r9(&result);
+    result = rules::r10(&result);
+    result = rules::r11(&result);
+    result = rules::r12(&result);
+
+    result
+}
+
+pub fn convert_string(content: &str) -> String {
+    let result = String::from(content);
+
+    result
+        .split(' ')
+        .map(|word| convert_word(word) + " ")
+        .collect()
 }
 
 pub fn replace(content: &str, old: &str, new: &str) -> String {
