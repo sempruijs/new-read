@@ -333,10 +333,17 @@ mod tests {
 
     #[test]
     fn test_convert_string() {
-        let example_1 = Example::build("waarschijnlijk", "waarsgynlyk");
-        let example_2 = Example::build("geschiedenis", "gesgiedenis");
-
-        let examples = vec![example_1, example_2];
+        let examples = vec![
+            Example::build("waarschijnlijk", "waarsgynlyk"),
+            Example::build("geschiedenis", "gesgiedenis"),
+            Example::build("hoogleraar", "hoogleraar"),
+            Example::build("vogel", "vogel"),
+            Example::build("fiets", "viets"),
+            Example::build("klank", "klaqk"),
+            Example::build("eindelijk", "yndelyk"),
+            Example::build("oude mensen", "aude mensen"),
+            Example::build("blij zijn", "bly zyn"),
+        ];
 
         examples
             .iter()
