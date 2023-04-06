@@ -129,44 +129,22 @@ pub mod rules {
     }
 }
 
+//todo: ignore ? ! , . -
 fn convert_word(word: &str) -> String {
     let mut result = String::from(word);
 
     result = rules::r2(&result);
-    println!("2. {}", result);
-
     result = rules::r3(&result);
-    println!("3. {}", result);
-
     result = rules::r5(&result);
-    println!("5. {}", result);
-
     result = rules::r6(&result);
-    println!("6. {}", result);
-
     result = rules::r7(&result);
-    println!("7. {}", result);
-
     result = rules::r1(&result);
-    println!("1. {}", result);
-
     result = rules::r4(&result);
-    println!("4. {}", result);
-
     result = rules::r8(&result);
-    println!("8. {}", result);
-
     result = rules::r9(&result);
-    println!("9. {}", result);
-
     result = rules::r10(&result);
-    println!("10. {}", result);
-
     result = rules::r11(&result);
-    println!("11. {}", result);
-
     result = rules::r12(&result);
-    println!("12. {}", result);
 
     result
 }
