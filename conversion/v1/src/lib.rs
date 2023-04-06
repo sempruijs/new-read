@@ -62,8 +62,10 @@ pub mod rules {
     ///
     /// ...dt -> t
     ///
+    /// todo: panics when length = 1
     pub fn r8(content: &str) -> String {
         let len = content.len();
+        // here panicced
         let last_two_chars = &content[len - 2..];
         match last_two_chars {
             "dt" if len > 2 => {
