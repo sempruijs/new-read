@@ -62,14 +62,13 @@ pub fn r7(content: &str) -> String {
 pub fn r8(content: &str) -> String {
     let len = content.len();
     // here panicced
-    let last_two_chars = &content[len - 2..];
-    match last_two_chars {
-        "dt" if len > 2 => {
-            let part_without_dt = String::from(&content[..len - 2]);
 
-            String::from(part_without_dt + "t")
-        }
-        _ => String::from(content),
+    if len > 2 && &content[len - 2..] == "dt" {
+        let part_without_dt = String::from(&content[..len - 2]);
+
+        String::from(part_without_dt + "t")
+    } else {
+        String::from(content)
     }
 }
 
