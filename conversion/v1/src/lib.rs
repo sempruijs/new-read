@@ -75,11 +75,13 @@ mod tests {
             Example::build("geschiedenis", "gesgiedenis"),
             Example::build("hoogleraar", "hoogleraar"),
             Example::build("vogel", "vogel"),
-            Example::build("fiets", "viets"),
+            Example::build("fiets", "fiets"),
             Example::build("klank", "klaqk"),
             Example::build("eindelijk", "yndelyk"),
-            Example::build("oude mensen", "aude mensen"),
+            Example::build("oude mensen", "oude mensen"),
             Example::build("blij zijn", "bly zyn"),
+            Example::build("cadeau", "kado"),
+            Example::build("auto", "outo"),
         ];
 
         examples

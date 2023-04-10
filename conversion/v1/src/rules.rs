@@ -24,10 +24,10 @@ pub fn r3(content: &str) -> String {
 
 /// # rule 4
 ///
-/// f -> v
+/// eau -> o
 ///
 pub fn r4(content: &str) -> String {
-    replace(content, "f", "v")
+    replace(content, "eau", "o")
 }
 
 /// # rule 5
@@ -110,10 +110,10 @@ pub fn r11(content: &str) -> String {
 
 /// # rule 12
 ///
-/// ou -> au
+/// au -> ou
 ///
 pub fn r12(content: &str) -> String {
-    replace(content, "ou", "au")
+    replace(content, "au", "ou")
 }
 
 /// # rule 13
@@ -163,8 +163,8 @@ mod tests {
 
     #[test]
     fn test_r4() {
-        let example_1 = Example::build("fiets", "viets");
-        let example_2 = Example::build("fluit", "vluit");
+        let example_1 = Example::build("bureau", "buro");
+        let example_2 = Example::build("cadeau", "cado");
 
         assert!(test_conversion(rules::r4, &example_1));
         assert!(test_conversion(rules::r4, &example_2));
@@ -231,8 +231,8 @@ mod tests {
 
     #[test]
     fn test_r12() {
-        let example_1 = Example::build("ouderwets", "auderwets");
-        let example_2 = Example::build("oude", "aude");
+        let example_1 = Example::build("automatisch", "outomatisch");
+        let example_2 = Example::build("auto", "outo");
 
         assert!(test_conversion(rules::r12, &example_1));
         assert!(test_conversion(rules::r12, &example_2));
