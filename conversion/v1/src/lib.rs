@@ -4,18 +4,19 @@ mod rules;
 fn convert_word(word: &str) -> String {
     let mut result = String::from(word);
 
+    result = rules::r1(&result);
     result = rules::r2(&result);
     result = rules::r3(&result);
+    result = rules::r4(&result);
     result = rules::r5(&result);
     result = rules::r6(&result);
     result = rules::r7(&result);
-    result = rules::r1(&result);
-    result = rules::r4(&result);
     result = rules::r8(&result);
     result = rules::r9(&result);
     result = rules::r10(&result);
     result = rules::r11(&result);
     result = rules::r12(&result);
+    result = rules::r13(&result);
 
     result
 }
