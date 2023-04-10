@@ -71,13 +71,6 @@ mod tests {
         use crate::tests::*;
 
         #[test]
-        fn test_r6() {
-            let example = Example::build("chocola", "sjocola");
-
-            assert!(test_conversion(rules::r6, &example));
-        }
-
-        #[test]
         fn test_r1() {
             let example_1 = Example::build("ijsje", "ysje");
             let example_2 = Example::build("belangrijk", "belangryk");
@@ -93,15 +86,6 @@ mod tests {
 
             assert!(test_conversion(rules::r2, &example_1));
             assert!(test_conversion(rules::r2, &example_2));
-        }
-
-        #[test]
-        fn test_r7() {
-            let example_1 = Example::build("canon", "kanon");
-            let example_2 = Example::build("cacoa", "kakoa");
-
-            assert!(test_conversion(rules::r7, &example_1));
-            assert!(test_conversion(rules::r7, &example_2));
         }
 
         #[test]
@@ -127,6 +111,22 @@ mod tests {
 
             assert!(test_conversion(rules::r5, &example_1));
             assert!(test_conversion(rules::r5, &example_2));
+        }
+
+        #[test]
+        fn test_r6() {
+            let example = Example::build("chocola", "sjocola");
+
+            assert!(test_conversion(rules::r6, &example));
+        }
+
+        #[test]
+        fn test_r7() {
+            let example_1 = Example::build("canon", "kanon");
+            let example_2 = Example::build("cacoa", "kakoa");
+
+            assert!(test_conversion(rules::r7, &example_1));
+            assert!(test_conversion(rules::r7, &example_2));
         }
 
         #[test]

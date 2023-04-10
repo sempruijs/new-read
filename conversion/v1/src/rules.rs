@@ -1,11 +1,3 @@
-/// # rule 6
-///
-/// ch -> sj
-///
-pub fn r6(content: &str) -> String {
-    replace(content, "ch", "sj")
-}
-
 /// # rule 1
 ///
 /// ij -> y
@@ -20,14 +12,6 @@ pub fn r1(content: &str) -> String {
 ///
 pub fn r2(content: &str) -> String {
     replace(content, "ei", "y")
-}
-
-/// # rule 7
-///
-/// c -> k
-///
-pub fn r7(content: &str) -> String {
-    replace(content, "c", "k")
 }
 
 /// # rule 3
@@ -52,6 +36,22 @@ pub fn r4(content: &str) -> String {
 ///
 pub fn r5(content: &str) -> String {
     replace(content, "sch", "sg")
+}
+
+/// # rule 6
+///
+/// ch -> sj
+///
+pub fn r6(content: &str) -> String {
+    replace(content, "ch", "sj")
+}
+
+/// # rule 7
+///
+/// c -> k
+///
+pub fn r7(content: &str) -> String {
+    replace(content, "c", "k")
 }
 
 /// # rule 8
