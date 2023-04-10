@@ -71,30 +71,31 @@ mod tests {
         use crate::tests::*;
 
         #[test]
-        fn test_r1() {
+        fn test_r6a() {
             let example = Example::build("chocola", "sjocola");
 
-            assert!(test_conversion(rules::r1, &example));
+            assert!(test_conversion(rules::r6, &example));
         }
 
         #[test]
-        fn test_r2() {
+        fn test_r1a() {
             let example_1 = Example::build("ijsje", "ysje");
             let example_2 = Example::build("belangrijk", "belangryk");
+
+            assert!(test_conversion(rules::r1, &example_1));
+            assert!(test_conversion(rules::r1, &example_2));
+        }
+
+        #[test]
+        fn test_r2a() {
+            let example_1 = Example::build("eindelijk", "yndelijk");
+            let example_2 = Example::build("eisen", "ysen");
 
             assert!(test_conversion(rules::r2, &example_1));
             assert!(test_conversion(rules::r2, &example_2));
         }
 
-        #[test]
-        fn test_r3() {
-            let example_1 = Example::build("eindelijk", "yndelijk");
-            let example_2 = Example::build("eisen", "ysen");
-
-            assert!(test_conversion(rules::r3, &example_1));
-            assert!(test_conversion(rules::r3, &example_2));
-        }
-
+        // --- todo rename tests with order from here ---
         #[test]
         fn test_r4() {
             let example_1 = Example::build("canon", "kanon");

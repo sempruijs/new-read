@@ -1,56 +1,56 @@
-/// # rule 1
+/// # rule 6
 ///
 /// ch -> sj
 ///
-pub fn r1(content: &str) -> String {
+pub fn r6(content: &str) -> String {
     replace(content, "ch", "sj")
+}
+
+/// # rule 1
+///
+/// ij -> y
+///
+pub fn r1(content: &str) -> String {
+    replace(content, "ij", "y")
 }
 
 /// # rule 2
 ///
-/// ij -> y
-///
-pub fn r2(content: &str) -> String {
-    replace(content, "ij", "y")
-}
-
-/// # rule 3
-///
 /// ei -> y
 ///
-pub fn r3(content: &str) -> String {
+pub fn r2(content: &str) -> String {
     replace(content, "ei", "y")
-}
-
-/// # rule 4
-///
-/// c -> k
-///
-pub fn r4(content: &str) -> String {
-    replace(content, "c", "k")
-}
-
-/// # rule 5
-///
-/// q -> kw
-///
-pub fn r5(content: &str) -> String {
-    replace(content, "q", "kw")
-}
-
-/// # rule 6
-///
-/// f -> v
-///
-pub fn r6(content: &str) -> String {
-    replace(content, "f", "v")
 }
 
 /// # rule 7
 ///
-/// sch -> sg
+/// c -> k
 ///
 pub fn r7(content: &str) -> String {
+    replace(content, "c", "k")
+}
+
+/// # rule 3
+///
+/// q -> kw
+///
+pub fn r3(content: &str) -> String {
+    replace(content, "q", "kw")
+}
+
+/// # rule 4
+///
+/// f -> v
+///
+pub fn r4(content: &str) -> String {
+    replace(content, "f", "v")
+}
+
+/// # rule 5
+///
+/// sch -> sg
+///
+pub fn r5(content: &str) -> String {
     replace(content, "sch", "sg")
 }
 
