@@ -74,22 +74,21 @@ pub fn r8(content: &str) -> String {
 
 /// # rule 9
 ///
-/// ...d -> t
+/// ... -> t
 ///
 pub fn r9(content: &str) -> String {
-    let last_char = content
-        .chars()
-        .last()
-        .expect("function cannot transform empty string");
     let len = content.len();
+    let last_char = content.chars().last();
 
     match last_char {
-        'd' if len > 1 => {
-            let part_without_d = String::from(&content[..len - 1]);
-
-            String::from(part_without_d + "t")
+        Some(_) => {
+            if last_char.unwrap() == 'd' {
+                let part_without_d = String::from(&content[..len - 1]);
+                return String::from(part_without_d + "t");
+            }
+            String::from(content)
         }
-        _ => String::from(content),
+        None => String::from(content),
     }
 }
 
@@ -125,8 +124,8 @@ pub fn r13(content: &str) -> String {
     replace(content, "x", "ks")
 }
 
-fn replace(content: &str, old: &str, new: &str) -> String {
-    let result = content.replace(old, new);
+fn replace(content: &str, ol: &str, new: &str) -> String {
+    let result = content.replace(ol, new);
 
     String::from(result)
 }
