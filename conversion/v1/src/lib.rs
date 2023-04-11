@@ -1,3 +1,51 @@
+use std::fs;
+
+pub fn tuple_to_transformation(tuple: (String, String)) -> impl Fn(&str) -> String {
+    move |word| replace(&word, &tuple.0, &tuple.1)
+}
+
+fn replace(content: &str, ol: &str, new: &str) -> String {
+    let result = content.replace(ol, new);
+
+    String::from(result)
+}
+
+fn get_transformations() -> Vec<Box<dyn Fn(&str) -> String>> {
+    let file_content = fs::read_to_string("src/rules.txt").unwrap();
+    let rules: Vec<&str> = file_content.lines().collect();
+
+    //todo: make map of this iteration
+    let mut transformations: Vec<Box<dyn Fn(&str) -> String>> = Vec::new();
+
+    for rule in rules {
+        let transformation = rule_to_transformation(&rule);
+        transformations.push(transformation);
+    }
+
+    transformations
+}
+
+pub fn convert_word_new(word: &str) -> String {
+    let transformations = get_transformations();
+    let mut result = String::from(word);
+
+    for transformation in transformations {
+        result = transformation(&result);
+    }
+
+    result
+}
+
+pub fn rule_to_tuple(rule: &str) -> (String, String) {
+    let left_right = rule.split(" -> ").collect::<Vec<&str>>();
+    (left_right[0].to_string(), left_right[1].to_string())
+}
+
+fn rule_to_transformation(rule: &str) -> Box<dyn Fn(&str) -> String> {
+    let tuple = rule_to_tuple(rule);
+    Box::new(tuple_to_transformation(tuple))
+}
+
 mod rules;
 
 //todo: ignore ? ! , . -
