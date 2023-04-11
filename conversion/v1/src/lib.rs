@@ -10,6 +10,33 @@ fn replace(content: &str, ol: &str, new: &str) -> String {
     String::from(result)
 }
 
+// replaces string if it ends on a certain string
+//
+// for instance:
+// ...dt -> t
+// wordt -> wort
+fn end_replace(word: &str, tuple: (String, String)) -> String {
+    // left and right is the inputs of the "rule"
+    let left: String = tuple.0.to_string().split("...").take(1).collect();
+    let right = tuple.1.to_string();
+
+    let div_len = word.len() - right.len();
+
+    if div_len > 0 {
+        let word = String::from(word);
+
+        let begining = &word[..div_len];
+        let ending = &word[div_len..];
+
+        match ending {
+            left => String::from(begining.to_string() + &right),
+            _ => word,
+        }
+    } else {
+        String::from(word)
+    }
+}
+
 fn get_transformations() -> Vec<Box<dyn Fn(&str) -> String>> {
     let file_content = fs::read_to_string("src/rules.txt").unwrap();
     let rules: Vec<&str> = file_content.lines().collect();
