@@ -1,11 +1,54 @@
 use std::fs;
 
-pub fn tuple_to_transformation(tuple: (String, String)) -> impl Fn(&str) -> String {
-    move |word| replace(&word, &tuple.0, &tuple.1)
+//get list of rules
+//rules have their data
+//rule has trait apply transformation
+#[derive(Clone, Debug)]
+pub enum Rule<'a> {
+    Replace(&'a str, &'a str),
+    EndReplace(&'a str, &'a str),
 }
 
-fn replace(content: &str, ol: &str, new: &str) -> String {
-    let result = content.replace(ol, new);
+trait Replacement {
+    fn apply_replacement(&self, word: &str) -> String;
+}
+
+impl Replacement for Rule<'_> {
+    fn apply_replacement(&self, word: &str) -> String {
+        match self {
+            Rule::Replace(left, right) => replace(word, (left, right)),
+            Rule::EndReplace(left, right) => end_replace(word, (left, right)),
+        }
+    }
+}
+
+pub fn rule_to_tuple(rule: &str) -> (String, String) {
+    let left_right = rule.split(" -> ").collect::<Vec<&str>>();
+    (left_right[0].to_string(), left_right[1].to_string())
+}
+
+pub fn line_to_rule(line: &str) -> Rule {
+    let left_right = line.split(" -> ").collect::<Vec<&str>>();
+    let left = left_right[0];
+    let right = left_right[1];
+
+    match left.contains("...") {
+        true => Rule::EndReplace(left, right),
+        false => Rule::Replace(left, right),
+    }
+}
+
+pub fn get_rules<'a>(content: &'a str) -> Vec<Rule<'a>> {
+    let lines: Vec<&str> = content.lines().collect();
+
+    lines
+        .iter()
+        .map(|line| line_to_rule(&line))
+        .collect::<Vec<Rule>>()
+}
+
+fn replace(content: &str, tuple: (&str, &str)) -> String {
+    let result = content.replace(tuple.0, tuple.1);
 
     String::from(result)
 }
@@ -15,7 +58,7 @@ fn replace(content: &str, ol: &str, new: &str) -> String {
 // for instance:
 // ...dt -> t
 // wordt -> wort
-fn end_replace(word: &str, tuple: (String, String)) -> String {
+fn end_replace(word: &str, tuple: (&str, &str)) -> String {
     // left and right is the inputs of the "rule"
     let left: String = tuple.0.to_string().split("...").take(1).collect();
     let right = tuple.1.to_string();
@@ -37,40 +80,14 @@ fn end_replace(word: &str, tuple: (String, String)) -> String {
     }
 }
 
-fn get_transformations() -> Vec<Box<dyn Fn(&str) -> String>> {
-    let file_content = fs::read_to_string("src/rules.txt").unwrap();
-    let rules: Vec<&str> = file_content.lines().collect();
+pub fn convert_word_new(word: &str, rules: Vec<Rule>) -> String {
+    let rules = rules.clone();
 
-    //todo: make map of this iteration
-    let mut transformations: Vec<Box<dyn Fn(&str) -> String>> = Vec::new();
-
-    for rule in rules {
-        let transformation = rule_to_transformation(&rule);
-        transformations.push(transformation);
-    }
-
-    transformations
-}
-
-pub fn convert_word_new(word: &str) -> String {
-    let transformations = get_transformations();
-    let mut result = String::from(word);
-
-    for transformation in transformations {
-        result = transformation(&result);
-    }
-
-    result
-}
-
-pub fn rule_to_tuple(rule: &str) -> (String, String) {
-    let left_right = rule.split(" -> ").collect::<Vec<&str>>();
-    (left_right[0].to_string(), left_right[1].to_string())
-}
-
-fn rule_to_transformation(rule: &str) -> Box<dyn Fn(&str) -> String> {
-    let tuple = rule_to_tuple(rule);
-    Box::new(tuple_to_transformation(tuple))
+    let word = String::from(word);
+    rules
+        .iter()
+        .map(|rule| rule.apply_replacement(&word))
+        .collect::<String>()
 }
 
 mod rules;

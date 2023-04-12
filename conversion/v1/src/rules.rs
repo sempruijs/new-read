@@ -58,10 +58,8 @@ pub fn r7(content: &str) -> String {
 ///
 /// ...dt -> t
 ///
-/// todo: panics when length = 1
 pub fn r8(content: &str) -> String {
     let len = content.len();
-    // here panicced
 
     if len > 2 && &content[len - 2..] == "dt" {
         let part_without_dt = String::from(&content[..len - 2]);
