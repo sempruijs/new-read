@@ -22,11 +22,6 @@ impl Replacement for Rule<'_> {
     }
 }
 
-pub fn rule_to_tuple(rule: &str) -> (String, String) {
-    let left_right = rule.split(" -> ").collect::<Vec<&str>>();
-    (left_right[0].to_string(), left_right[1].to_string())
-}
-
 pub fn line_to_rule(line: &str) -> Rule {
     let left_right = line.split(" -> ").collect::<Vec<&str>>();
     let left = left_right[0];
@@ -80,7 +75,7 @@ fn end_replace(word: &str, tuple: (&str, &str)) -> String {
     }
 }
 
-pub fn convert_word(word: &str, rules: Vec<Rule>) -> String {
+pub fn convert_word(word: &str, rules: &Vec<Rule>) -> String {
     let rules = rules.clone();
 
     let mut result = String::from(word);
@@ -92,18 +87,18 @@ pub fn convert_word(word: &str, rules: Vec<Rule>) -> String {
     result
 }
 
-// pub fn convert_string(content: &str, rules: Vec<Rule>) -> String {
-//     //apply new-read to every word
-//     let result: String = content
-//         .split(' ')
-//         .map(|word| convert_word(word, rules) + " ")
-//         .collect::<String>();
+pub fn convert_string(content: &str, rules: &Vec<Rule>) -> String {
+    //apply new-read to every word
+    let result: String = content
+        .split(' ')
+        .map(|word| convert_word(word, rules) + " ")
+        .collect::<String>();
 
-//     //remove last space from the string
-//     let mut result = result.chars();
-//     result.next_back();
-//     result.as_str().to_string()
-// }
+    //remove last space from the string
+    let mut result = result.chars();
+    result.next_back();
+    result.as_str().to_string()
+}
 
 #[cfg(test)]
 mod tests {
