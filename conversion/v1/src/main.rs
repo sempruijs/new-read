@@ -7,8 +7,8 @@ fn main() {
     let rules_content = fs::read_to_string("./src/rules.txt").expect("problem reading rules file");
     let rules = get_rules(&rules_content);
 
-    let old_word = "eigenlijk is dat waar, wat voor weer wordt het vandaag, bureau";
-    let new_word = convert_string(old_word, &rules);
+    let content = fs::read_to_string("./test.md").expect("test.md not found");
+    let new_read_content = convert_string(&content, &rules);
 
-    println!("{}", new_word);
+    println!("{}", new_read_content);
 }
