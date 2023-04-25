@@ -1,4 +1,4 @@
-use std::fs;
+use arguments;
 
 //get list of rules
 //rules have their data
@@ -7,6 +7,21 @@ use std::fs;
 pub enum Rule<'a> {
     Replace(&'a str, &'a str),
     EndReplace(&'a str, &'a str),
+}
+
+pub struct Context {
+    pub file_path: String,
+}
+
+pub fn get_context() -> Context {
+    let arguments = std::env::args();
+    let arguments = arguments::parse(arguments).unwrap();
+
+    let file_path = arguments.orphans[0].clone();
+
+    Context {
+        file_path: file_path,
+    }
 }
 
 trait Replacement {
