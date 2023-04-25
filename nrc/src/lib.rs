@@ -92,10 +92,10 @@ fn end_replace(word: &str, tuple: (&str, &str)) -> String {
     // 5
     let len = word.len();
 
-    // 5 - 2 = 3
-    let div_len = len - left.len();
+    if len > left.len() {
+        // 5 - 2 = 3
+        let div_len = len - left.len();
 
-    if div_len > 0 {
         let (part_without_end, old_end) = word.split_at(div_len);
 
         if old_end == "dt" {
