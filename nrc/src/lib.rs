@@ -1,4 +1,6 @@
 use arguments;
+use std::process;
+use std::result::Result;
 
 //get list of rules
 //rules have their data
@@ -13,14 +15,24 @@ pub struct Context {
     pub file_path: String,
 }
 
-pub fn get_context() -> Context {
+pub enum ContextError {
+    NoPath,
+    NotFound,
+}
+
+pub fn get_context() -> Result<Context, ContextError> {
     let arguments = std::env::args();
     let arguments = arguments::parse(arguments).unwrap();
+    let orphans = arguments.orphans;
 
-    let file_path = arguments.orphans[0].clone();
+    if orphans.is_empty() {
+        Err(ContextError::NoPath)
+    } else {
+        let file_path = orphans[0].clone();
 
-    Context {
-        file_path: file_path,
+        Ok(Context {
+            file_path: file_path,
+        })
     }
 }
 
