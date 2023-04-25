@@ -137,40 +137,36 @@ mod tests {
         }
     }
 
-    // pub fn test_conversion(rule: fn(&str) -> String, example: &Example) -> bool {
-    //     let input = &example.input;
-    //     let output = &example.output;
+    fn test_conversion(example: &Example) {
+        let rules_content =
+            fs::read_to_string("./src/rules.txt").expect("problem reading rules file");
+        let rules = get_rules(&rules_content);
 
-    //     let result = &rule(&input) == output;
+        let input = &example.input;
+        let output = convert_string(&input, &rules);
 
-    //     match result {
-    //         true => result,
-    //         false => {
-    //             print!("{} , {} -> {}", input, output, rule(&input));
-    //             result
-    //         }
-    //     }
-    // }
+        let expected_output = &example.output;
+        assert_eq!(&output, expected_output);
+    }
 
-    // #[test]
-    // #[ignore]
-    // fn test_convert_string() {
-    //     let examples = vec![
-    //         Example::build("waarschijnlijk", "waarsgynlyk"),
-    //         Example::build("geschiedenis", "gesgiedenis"),
-    //         Example::build("hoogleraar", "hoogleraar"),
-    //         Example::build("vogel", "vogel"),
-    //         Example::build("fiets", "fiets"),
-    //         Example::build("klank", "klaqk"),
-    //         Example::build("eindelijk", "yndelyk"),
-    //         Example::build("oude mensen", "oude mensen"),
-    //         Example::build("blij zijn", "bly zyn"),
-    //         Example::build("cadeau", "kado"),
-    //         Example::build("auto", "outo"),
-    //     ];
+    #[test]
+    fn test_convert_string() {
+        let examples = vec![
+            Example::build("waarschijnlijk", "waarsgynlyk"),
+            Example::build("geschiedenis", "gesgiedenis"),
+            Example::build("hoogleraar", "hoogleraar"),
+            Example::build("vogel", "vogel"),
+            Example::build("fiets", "fiets"),
+            Example::build("klank", "klaqk"),
+            Example::build("eindelijk", "yndelyk"),
+            Example::build("oude mensen", "oude mensen"),
+            Example::build("blij zijn", "bly zyn"),
+            Example::build("cadeau", "kado"),
+            Example::build("auto", "outo"),
+        ];
 
-    //     examples
-    //         .iter()
-    //         .for_each(|example| assert!(test_conversion(convert_string, example)));
-    // }
+        examples
+            .iter()
+            .for_each(|example| test_conversion(&example));
+    }
 }

@@ -1,3 +1,13 @@
 ij -> y
 ei -> y
+q -> kw
+eau -> o
+sch -> sg
+ch -> sj
+c -> k
 ...dt -> t
+...d -> t
+ng -> q
+nk -> qk
+au -> ou
+x -> ks
