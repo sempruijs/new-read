@@ -1,5 +1,4 @@
 use arguments;
-use std::process;
 use std::result::Result;
 
 //get list of rules
@@ -30,9 +29,7 @@ pub fn get_context() -> Result<Context, ContextError> {
     } else {
         let file_path = orphans[0].clone();
 
-        Ok(Context {
-            file_path: file_path,
-        })
+        Ok(Context { file_path })
     }
 }
 
@@ -137,6 +134,7 @@ pub fn convert_string(content: &str, rules: &Vec<Rule>) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs;
 
     #[test]
     pub fn test_end_replace() {

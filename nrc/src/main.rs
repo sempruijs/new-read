@@ -1,5 +1,5 @@
-//version 0.0.1
 use std::fs;
+use std::process;
 use v1::convert_string;
 use v1::get_context;
 use v1::get_rules;
@@ -21,6 +21,7 @@ fn main() {
         Err(context_error) => match context_error {
             ContextError::NoPath => {
                 eprintln!("Not enough arguments. Please profide a filepath. For example\n\n    nrc example.txt\n");
+                process::exit(1)
             }
             ContextError::NotFound => {
                 eprintln!("not a vallid file path");
