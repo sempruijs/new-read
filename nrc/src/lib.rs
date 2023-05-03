@@ -1,4 +1,3 @@
-use arguments;
 use std::result::Result;
 
 //get list of rules
@@ -8,29 +7,6 @@ use std::result::Result;
 pub enum Rule<'a> {
     Replace(&'a str, &'a str),
     EndReplace(&'a str, &'a str),
-}
-
-pub struct Context {
-    pub file_path: String,
-}
-
-pub enum ContextError {
-    NoPath,
-    NotFound,
-}
-
-pub fn get_context() -> Result<Context, ContextError> {
-    let arguments = std::env::args();
-    let arguments = arguments::parse(arguments).unwrap();
-    let orphans = arguments.orphans;
-
-    if orphans.is_empty() {
-        Err(ContextError::NoPath)
-    } else {
-        let file_path = orphans[0].clone();
-
-        Ok(Context { file_path })
-    }
 }
 
 trait Replacement {
