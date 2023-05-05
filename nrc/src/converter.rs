@@ -1,27 +1,56 @@
-use std::result::Result;
+// # how the convert function is made
+//
+// the convert function exepts a &str and a Vec<Rule>
+// a rule defines how a word should be manipulated
+// so, a rule is simply a transformation
+// the convert_word function maps all rules on the string
+// convert word maps convert_word on every word in the input
+//
+// rules are generated based on the **rules.txt** file
+//
+// ## the rule syntax used in **rules.txt**
+//
+// #### ends on
+//
+// ...[old ending] -> [new ending]
+//
+// example:
+//
+// ...dt -> t
+//
+// apply it to deffernt inputs
+//
+// wordt -> wort
+// eigenlijk -> eigenlijk
+// want -> want
+// werdt -> wert
+//
+//
+// #### replace
+//
+// [old part] -> [new part]
+//
+// example:
+//
+// ij -> y
+//
+// implement this rule on different inputs
+//
+// eigenlijk -> eigenlyk
+// overal -> overal
+// ijsjes -> ysjes
 
-//get list of rules
-//rules have their data
-//rule has trait apply transformation
+// rules have assosiated strings of the transformations
+// no syntax transformations are applied.
+// rule has trait apply transformation
 #[derive(Clone, Debug)]
 pub enum Rule<'a> {
     Replace(&'a str, &'a str),
     EndReplace(&'a str, &'a str),
 }
 
-trait Replacement {
-    fn apply_replacement(&self, word: &str) -> String;
-}
-
-impl Replacement for Rule<'_> {
-    fn apply_replacement(&self, word: &str) -> String {
-        match self {
-            Rule::Replace(left, right) => replace(word, (left, right)),
-            Rule::EndReplace(left, right) => end_replace(word, (left, right)),
-        }
-    }
-}
-
+/// this will make of a line in the **rules.txt** file a Rule
+/// it will NOT check for syntex errors, if thir a incorrect line, it will panic
 pub fn line_to_rule(line: &str) -> Rule {
     let left_right = line.split(" -> ").collect::<Vec<&str>>();
     let left = left_right[0];
@@ -33,6 +62,21 @@ pub fn line_to_rule(line: &str) -> Rule {
     }
 }
 
+trait Replacement {
+    fn apply_replacement(&self, word: &str) -> String;
+}
+
+impl Replacement for Rule<'_> {
+    /// this will apply the rule to the word
+    fn apply_replacement(&self, word: &str) -> String {
+        match self {
+            Rule::Replace(left, right) => replace(word, (left, right)),
+            Rule::EndReplace(left, right) => end_replace(word, (left, right)),
+        }
+    }
+}
+
+/// this will get the rules based on the 'content' which should be a **rules.txt** type of file
 pub fn get_rules<'a>(content: &'a str) -> Vec<Rule<'a>> {
     let lines: Vec<&str> = content.lines().collect();
 
@@ -42,6 +86,10 @@ pub fn get_rules<'a>(content: &'a str) -> Vec<Rule<'a>> {
         .collect::<Vec<Rule>>()
 }
 
+/// this is the transformation logic for a normal replace
+///
+///[old part] -> [new part]
+///
 fn replace(content: &str, tuple: (&str, &str)) -> String {
     let result = content.replace(tuple.0, tuple.1);
 
@@ -82,6 +130,7 @@ fn end_replace(word: &str, tuple: (&str, &str)) -> String {
     String::from(word)
 }
 
+// this will apply the transformation of the rules parsed and return a String with the transformations applied
 pub fn convert_word(word: &str, rules: &Vec<Rule>) -> String {
     let rules = rules.clone();
 
@@ -94,6 +143,7 @@ pub fn convert_word(word: &str, rules: &Vec<Rule>) -> String {
     result
 }
 
+/// converts every word parsed in content and apply every tranformation of the rules and returns a String
 pub fn convert_string(content: &str, rules: &Vec<Rule>) -> String {
     //apply new-read to every word
     let result: String = content
