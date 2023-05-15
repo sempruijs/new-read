@@ -2,6 +2,7 @@ use crate::converter::*;
 use clap::Parser;
 use std::fs;
 use std::fs::File;
+use std::include_str;
 use std::io::prelude::*;
 
 mod converter;
@@ -27,7 +28,7 @@ fn create_file(name: &str, content: &str) -> std::io::Result<()> {
 fn main() {
     let args = Args::parse();
 
-    let rules_string = fs::read_to_string("./src/rules.txt").expect("rules.txt not found");
+    let rules_string = include_str!("rules.txt");
     let rules = get_rules(&rules_string);
 
     let content = fs::read_to_string(&args.file_name).expect("test.md not found");
