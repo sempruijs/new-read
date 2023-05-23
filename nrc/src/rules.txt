@@ -3,6 +3,7 @@ ei -> y
 q -> kw
 eau -> o
 sch -> sg
+cht -> gt
 ch -> sj
 c -> k
 ...dt -> t
