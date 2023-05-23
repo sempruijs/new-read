@@ -5,7 +5,6 @@ eau -> o
 sch -> sg
 cht -> gt
 ch -> sj
-c -> k
 ...dt -> t
 ...d -> t
 ng -> q
